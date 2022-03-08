@@ -15556,7 +15556,7 @@ OpenMenuWindow:
 	bne.s	+	; rts
 
 	move.b	(Joypad_pressed).w, d0
-	btst	#Button_C, d0		; C button pressed
+	btst	#Button_B, d0		; B button pressed
 	beq.s	+	; if not, return
 	move.b	#SFXID_Selection, (Sound_queue).w
 	move.w	#WinID_PlayerMenu, (Window_queue).w
@@ -21419,24 +21419,24 @@ CopyrightString:
 
 Map_CheckInteractions:
 	tst.w	(Window_queue).w
-	bne.s	loc_D7FA
+	bne.s	loc_D7FA	; rtn
 	tst.w	(Window_index).w
-	bne.s	loc_D7FA
+	bne.s	loc_D7FA	; rtn
 	tst.w	(Script_flag).w
-	bne.s	loc_D7FA
+	bne.s	loc_D7FA	; rtn
 	tst.w	(Window_routine_2).w
-	bne.s	loc_D7FA
+	bne.s	loc_D7FA	; rtn
 	move.w	(Interaction_routine).w, d2
 	bne.w	loc_D862
 	tst.w	(Opening_ending_flag).w
-	bne.s	loc_D7FA
+	bne.s	loc_D7FA	; rtn
 	tst.w	(Cutscene_flag).w
-	bne.s	loc_D7FA
+	bne.s	loc_D7FA	; rtn
 	tst.b	(Map_event_load).w
-	bne.s	loc_D7FA
+	bne.s	loc_D7FA	; rtn
 
 	move.b	(Joypad_pressed).w, d0
-	btst	#Button_A, d0			; A button press
+	btst	#Button_C, d0			; C button press
 	bne.s	Map_Interact	; branch if pressed
 loc_D7FA:
 	rts
