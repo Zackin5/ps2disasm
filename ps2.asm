@@ -24095,8 +24095,8 @@ loc_F19E:
 loc_F1CE:
 	rts
 BattleFighting_TurnEnd:
-	tst.w	(Fight_interrupted_flag).w	; did we choose to interrupt the fight (pressed a button while fighting)?
-	beq.s	+							; if not, branch
+	;tst.w	(Fight_interrupted_flag).w	; did we choose to interrupt the fight (pressed a button while fighting)?
+	;beq.s	+							; if not, branch
 	move.w	#0, (Fight_active_flag).w
 	move.w	#0, (Fight_interrupted_flag).w
 	move.b	#0, (Battle_main_routine_index).w

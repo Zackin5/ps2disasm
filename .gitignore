@@ -1,5 +1,6 @@
 *.bat
 .vscode
+docs/
 
 # Default repo
 *~
