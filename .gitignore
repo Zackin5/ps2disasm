@@ -1,3 +1,7 @@
+*.bat
+.vscode
+
+# Default repo
 *~
 ps2.h
 ps2.p
