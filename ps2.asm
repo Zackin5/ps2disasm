@@ -20880,7 +20880,6 @@ loc_D7FA:
 
 
 Map_Interact:
-	move.b	#SFXID_Selection, (Sound_queue).w
 	lea	(Characters_RAM).w, a0
 	move.w	$2A(a0), d6
 	beq.s	+
@@ -20888,7 +20887,9 @@ Map_Interact:
 +
 	move.w	d6, d0
 	bsr.w	Map_ChkTargetInteract		; check if we're interacting with something
-	beq.s	loc_D7FA					; branch if we are not interacting with anything
+	beq.s	loc_D7FA					; break if we are not interacting with anything
+
+	move.b	#SFXID_Selection, (Sound_queue).w ; play interact SFX (only on valid interaction)
 
 	lea	(Interact_TargetFacingDirs).l, a2
 	adda.w	d0, a2
@@ -20905,7 +20906,6 @@ Map_Interact:
 	move.b	#$FF, 3(a1)
 +
 	move.w	type(a1), d4
-loc_D84A:
 	move.w	#WinID_ScriptMessage, (Window_queue).w
 	move.w	#1, (Interaction_routine).w
 	move.w	#0, (Interaction_routine_2).w
