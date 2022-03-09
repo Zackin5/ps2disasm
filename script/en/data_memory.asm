@@ -69,12 +69,13 @@ loc_19599:
 
 ; the following lines don't make much sense here, because they are called right after the question, before the player gets to answer!
 ; Remove the following lines until the C5 (KEEP THE C5), if you don't want it.
-	dc.b	$C1
-	dc.b	"I see. Well, good luck!"
+	;dc.b	$C1
+	;dc.b	"I see. Well, good luck!"
 	dc.b	$C5
 
 loc_195D8:
-	dc.b	"Ok, good-bye, then."
+	;dc.b	"Ok, good-bye, then."
+	dc.b	"I see. Well, good luck!"
 	dc.b	$C4
 
 loc_195EC:

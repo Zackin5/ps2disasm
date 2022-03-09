@@ -20914,7 +20914,7 @@ loc_D1E0:
 	bsr.w	loc_D700
 	move.w	#1, ($FFFFFF00).w		; make sure this part (check game save slots) is run only once (usually when you return to the intro screen by soft reset, game over, etc...)
 	move.w	#WinID_ScriptMessage2, (Window_queue).w
-	move.w	#$130B, (Script_queue).w		; "Let me check the backup data."
+	;move.w	#$130B, (Script_queue).w		; "Let me check the backup data."
 	move.w	#0, ($FFFFC602).w
 	addq.w	#1, (Window_routine_4).w
 	rts
@@ -20938,14 +20938,14 @@ loc_D20E:
 	tst.b	$2000(a0)
 	beq.s	loc_D252
 loc_D234:
-	move.w	#$130D, (Script_queue).w
+	move.w	#$130D, (Script_queue).w ; There is a problem with
 	bsr.w	loc_D676
 	bne.s	loc_D264
 	move.w	($FFFFC602).w, d0
 	addq.w	#4, d0
 	bsr.w	loc_D676
 	bne.s	loc_D280
-	move.w	#$130C, (Script_queue).w
+	move.w	#$130C, (Script_queue).w ; "The data for ", $C0, " is ok."
 loc_D252:
 	addq.w	#1, ($FFFFC602).w
 	cmpi.w	#4, ($FFFFC602).w
@@ -20973,7 +20973,7 @@ loc_D28C:
 	move.w	#$130E, ($FFFFCD02).w
 	bra.s	loc_D252
 loc_D298:
-	move.w	#$1310, (Script_queue).w
+	move.w	#$1310, (Script_queue).w ; Data check complete.
 	addq.w	#1, (Window_routine_4).w
 	rts
 loc_D2A4:
@@ -21118,7 +21118,7 @@ loc_D458:
 	tst.w	(Window_routine_3).w
 	bne.w	loc_D4AA
 	move.w	(Window_routine_4).w, d1
-	bne.s	loc_D49C
+	bne.s	loc_D41E
 	move.w	($FFFFDEBC).w, d0
 	ext.l	d0
 	move.l	d0, (Meseta_value).w
@@ -21128,17 +21128,9 @@ loc_D458:
 	lsl.w	#3, d0
 	adda.w	d0, a0
 	tst.b	(a0)
-	beq.s	loc_D490
+	beq.s	loc_D412
 	move.w	#$1307, (Script_queue).w
 	addq.w	#1, (Window_routine_2).w
-	rts
-loc_D490:
-	move.w	#$130A, (Script_queue).w		; "There is no data for that number. Enter a different number."
-	addq.w	#1, (Window_routine_4).w
-	rts
-loc_D49C:
-	move.w	#0, (Window_routine_4).w
-	move.w	#WinID_SaveSlots, (Window_index).w
 	rts
 loc_D4AA:
 	subi.w	#$C, (Window_routine_2).w
