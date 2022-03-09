@@ -20850,15 +20850,15 @@ CheckIfDoublePrice:
 
 IntroScr_CheckRoutine:
 	tst.w	(Window_queue).w
-	bne.s	loc_D158
+	bne.s	+
 	tst.w	(Window_index).w
-	bne.s	loc_D158
+	bne.s	+
 	tst.w	(Script_flag).w
-	bne.s	loc_D158
+	bne.s	+
 	move.w	(Window_routine_2).w, d1
 	bne.s	Intro_RunRoutine
 	move.b	#GameModeID_Title, (Game_mode_index).w
-loc_D158:
++
 	rts
 
 Intro_RunRoutine:
@@ -21438,12 +21438,12 @@ Map_Interact:
 	move.b	#SFXID_Selection, (Sound_queue).w
 	lea	(Characters_RAM).w, a0
 	move.w	$2A(a0), d6
-	beq.s	loc_D810
+	beq.s	+
 	divu.w	#3, d6
-loc_D810:
++
 	move.w	d6, d0
 	bsr.w	Map_ChkTargetInteract		; check if we're interacting with something
-	beq.s	loc_D84A					; branch if we are not interacting with anything and display the there's nothing message
+	beq.s	loc_D7FA					; branch if we are not interacting with anything
 
 	lea	(Interact_TargetFacingDirs).l, a2
 	adda.w	d0, a2
@@ -21452,20 +21452,14 @@ loc_D810:
 	tst.w	$14(a1)
 	bne.s	loc_D7FA
 	cmpi.b	#1, $2E(a1)
-	bne.s	loc_D846			; branch if we are not interacting with people
+	bne.s	+			; branch if we are not interacting with people
 	moveq	#0, d0
 	move.b	(a2), d0
 	move.w	d0, $24(a1)
 	move.w	d0, $2A(a1)
 	move.b	#$FF, 3(a1)
-loc_D846:
++
 	move.w	type(a1), d4
-loc_D84A:
-	move.w	#WinID_ScriptMessage, (Window_queue).w
-	move.w	#1, (Interaction_routine).w
-	move.w	#0, (Interaction_routine_2).w
-	move.w	d4, (Interaction_type).w
-	moveq	#0, d2
 loc_D862:
 	moveq	#0, d0
 	move.b	(Interaction_type).w, d0
