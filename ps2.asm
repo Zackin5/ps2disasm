@@ -20905,6 +20905,12 @@ Map_Interact:
 	move.b	#$FF, 3(a1)
 +
 	move.w	type(a1), d4
+loc_D84A:
+	move.w	#WinID_ScriptMessage, (Window_queue).w
+	move.w	#1, (Interaction_routine).w
+	move.w	#0, (Interaction_routine_2).w
+	move.w	d4, (Interaction_type).w
+	moveq	#0, d2
 loc_D862:
 	moveq	#0, d0
 	move.b	(Interaction_type).w, d0
