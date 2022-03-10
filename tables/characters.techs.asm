@@ -1,0 +1,293 @@
+; =============================================
+; Techniques learned for each character
+; =============================================
+CharAvailableTechniques:
+
+Rolf_MapTechs:
+	dc.b	TechID_Ryuka
+	dc.b	TechID_Hinas
+	dc.b	TechID_Res
+	dc.b	TechID_Gires
+	dc.b	TechID_Rever
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+; ---------------------------------------------
+Rolf_BattleTechs:
+	dc.b	TechID_Foi
+	dc.b	TechID_Gifoi
+	dc.b	TechID_Tsu
+	dc.b	TechID_Zan
+	dc.b	TechID_Res
+	dc.b	TechID_Gra
+	dc.b	TechID_Githu
+	dc.b	TechID_Nafoi
+	dc.b	TechID_Gizan
+	dc.b	TechID_Gires
+	dc.b	TechID_Nathu
+	dc.b	TechID_Nazan
+	dc.b	TechID_Gigra
+	dc.b	TechID_Megid
+	dc.b	TechID_None
+	dc.b	TechID_None
+; ---------------------------------------------
+Nei_MapTechs:
+	dc.b	TechID_Res
+	dc.b	TechID_Anti
+	dc.b	TechID_Sak
+	dc.b	TechID_Nasak
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+; ---------------------------------------------
+Nei_BattleTechs:
+	dc.b	TechID_Res
+	dc.b	TechID_Sak
+	dc.b	TechID_Nasak
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+; ---------------------------------------------
+Rudo_MapTechs:
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+; ---------------------------------------------
+Rudo_BattleTechs:
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+; ---------------------------------------------
+Amy_MapTechs:
+	dc.b	TechID_Res
+	dc.b	TechID_Anti
+	dc.b	TechID_Gires
+	dc.b	TechID_Sar
+	dc.b	TechID_Sak
+	dc.b	TechID_Nasak
+	dc.b	TechID_Nares
+	dc.b	TechID_Rever
+	dc.b	TechID_Gisar
+	dc.b	TechID_Nasar
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+; ---------------------------------------------
+Amy_BattleTechs:
+	dc.b	TechID_Res
+	dc.b	TechID_Shu
+	dc.b	TechID_Deban
+	dc.b	TechID_Foi
+	dc.b	TechID_Gires
+	dc.b	TechID_Sar
+	dc.b	TechID_Sak
+	dc.b	TechID_Nasak
+	dc.b	TechID_Sashu
+	dc.b	TechID_Nares
+	dc.b	TechID_Saner
+	dc.b	TechID_Gisar
+	dc.b	TechID_Nasar
+	dc.b	TechID_Gra
+	dc.b	TechID_Gigra
+	dc.b	TechID_None
+; ---------------------------------------------
+Hugh_MapTechs:
+	dc.b	TechID_Res
+	dc.b	TechID_Gires
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+; ---------------------------------------------
+Hugh_BattleTechs:
+	dc.b	TechID_Rimit
+	dc.b	TechID_Doran
+	dc.b	TechID_Gen
+	dc.b	TechID_Sagen
+	dc.b	TechID_Shinb
+	dc.b	TechID_Shiza
+	dc.b	TechID_Res
+	dc.b	TechID_Foi
+	dc.b	TechID_Gifoi
+	dc.b	TechID_Vol
+	dc.b	TechID_Zan
+	dc.b	TechID_Savol
+	dc.b	TechID_Gra
+	dc.b	TechID_Gires
+	dc.b	TechID_Gigra
+	dc.b	TechID_Gizan
+; ---------------------------------------------
+Anna_MapTechs:
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+; ---------------------------------------------
+Anna_BattleTechs:
+	dc.b	TechID_Foi
+	dc.b	TechID_Ner
+	dc.b	TechID_Shift
+	dc.b	TechID_Fanbi
+	dc.b	TechID_Zan
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+; ---------------------------------------------
+Kain_MapTechs:
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+; ---------------------------------------------
+Kain_BattleTechs:
+	dc.b	TechID_Foi
+	dc.b	TechID_Forsa
+	dc.b	TechID_Eijia
+	dc.b	TechID_Rimet
+	dc.b	TechID_Gaj
+	dc.b	TechID_Conte
+	dc.b	TechID_Zan
+	dc.b	TechID_Gigaj
+	dc.b	TechID_Sag
+	dc.b	TechID_Gra
+	dc.b	TechID_Nagaj
+	dc.b	TechID_Gisag
+	dc.b	TechID_Brose
+	dc.b	TechID_Nasag
+	dc.b	TechID_Gizan
+	dc.b	TechID_None
+; ---------------------------------------------
+Shir_MapTechs:
+	dc.b	TechID_Ryuka
+	dc.b	TechID_Hinas
+	dc.b	TechID_Res
+	dc.b	TechID_Gires
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+; ---------------------------------------------
+Shir_BattleTechs:
+	dc.b	TechID_Foi
+	dc.b	TechID_Res
+	dc.b	TechID_Gifoi
+	dc.b	TechID_Zan
+	dc.b	TechID_Gra
+	dc.b	TechID_Gizan
+	dc.b	TechID_Gires
+	dc.b	TechID_Nazan
+	dc.b	TechID_Gigra
+	dc.b	TechID_Nagra
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+	dc.b	TechID_None
+; =============================================
