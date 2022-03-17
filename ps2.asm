@@ -28665,7 +28665,7 @@ PlaneMap_WinPlayerMenu:
 	dc.b	"       "
 	dc.b	$B4, $B5, "TECH "
 	dc.b	"       "
-	dc.b	$B4, $B5, "STRNG"
+	dc.b	$B4, $B5, "PARTY"
 	dc.b	"       "
 	dc.b	$B4, $B5, "EQP  "
 	dc.b	$BE, $BE, $BE, $BE, $BE, $BE, $BE

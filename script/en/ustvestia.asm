@@ -58,7 +58,7 @@ loc_1B0F4:
 	dc.b	$C5
 
 loc_1B10B:
-	dc.b	"Hey, he looks smart."
+	dc.b	"Hey, he looks cute."
 	dc.b	$C1
 	dc.b	"I'll give lessons for"
 	dc.b	$C3
