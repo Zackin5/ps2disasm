@@ -676,6 +676,11 @@ loc_A1FA:
 	bne.w	ItemAction_CloseMenu
 	rts
 
+
+ItemAction_CloseMenu:
+	subq.w	#1, (Window_routine_3).w
+	jmp		Win_CloseCurrent
+
 NeiSword_ItemSelected:
 	tst.w	d1
 	bne.s	loc_A21E
@@ -864,10 +869,5 @@ loc_A416:
 	bne.w	Win_Close
 	bsr.w	loc_AE2E
 	bsr.w	RemoveItemFromInventory
-	;bra.w	CloseAllWindows
-	bra.w	ItemAction_CloseMenu
+	bra.w	CloseAllWindows
 ; -------------------------------------------
-
-ItemAction_CloseMenu:
-	subq.w	#1, (Window_routine_3).w
-	jmp		Win_CloseCurrent
