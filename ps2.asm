@@ -15717,10 +15717,15 @@ ItemAction_NoAction:
 
 +
 	subq.w	#1, d1
-	bne.w	CloseAllWindows
+	;bne.w	CloseAllWindows
+	bne.w	+
 	move.w	#4, (Script_queue).w		; "Nothing happens."
-	addq.w	#1, (Window_routine_3).w
+	addq.w	#1, (Window_routine_3).w	; Increment text tile
 	rts
++
+	subq.w	#1, (Window_routine_3).w
+	jmp		Win_CloseCurrent
+
 ; -------------------------------------------
 ItemAction_SmallKey:
 	tst.w	d1
