@@ -16522,8 +16522,8 @@ loc_A44C:
 	jmp	StateEntry_OpenedActionIndex(pc,d0.w)
 ; -----------------------------------
 StateEntry_OpenedActionIndex:
-	bra.w	loc_A462
-	bra.w	loc_A48A
+	bra.w	loc_A462 ; State menu?
+	bra.w	loc_A48A ; Order menu?
 ; -----------------------------------
 loc_A462:
 	move.w	(Window_routine_3).w, d1

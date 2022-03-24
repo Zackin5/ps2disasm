@@ -50,15 +50,15 @@ SelectGame_CheckSaves:
 	move.w	(Window_routine_4).w, d1
 	lsl.w	#2, d1
 	andi.w	#$C, d1
-	jmp	loc_D1D0(pc,d1.w)
+	jmp	CheckSaves_State(pc,d1.w)
 
-loc_D1D0:
-	bra.w	loc_D1E0
-	bra.w	loc_D20E
-	bra.w	loc_D298
-	bra.w	loc_D2A4
+CheckSaves_State:
+	bra.w	CheckSaves_Start
+	bra.w	CheckSaves_Audit
+	bra.w	CheckSaves_Complete
+	bra.w	CheckSaves_Return
 
-loc_D1E0:
+CheckSaves_Start:
 	tst.w	($FFFFFF00).w
 	bne.s	loc_D208
 	bsr.w	loc_D700
@@ -73,7 +73,7 @@ loc_D208:
 	addq.w	#1, (Window_routine_2).w
 	rts
 
-loc_D20E:
+CheckSaves_Audit:
 	move.w	($FFFFC602).w, d0
 	ext.l	d0
 	move.l	d0, (Meseta_value).w
@@ -84,10 +84,10 @@ loc_D20E:
 	lsl.w	#3, d1
 	adda.w	d1, a0
 	tst.b	(a0)
-	bne.s	loc_D234
+	bne.s	CheckSaves_Load
 	tst.b	$2000(a0)
 	beq.s	loc_D252
-loc_D234:
+CheckSaves_Load:
 	move.w	#$130D, (Script_queue).w ; There is a problem with
 	bsr.w	loc_D676
 	bne.s	loc_D264
@@ -96,12 +96,13 @@ loc_D234:
 	bsr.w	loc_D676
 	bne.s	loc_D280
 	move.w	#$130C, (Script_queue).w ; "The data for ", $C0, " is ok."
+	;move.b	#1, (Window_current_option).w ; Reindex selected menu option so we start at CONTINUE TODO: figure out what's overwriting this
 loc_D252:
 	addq.w	#1, ($FFFFC602).w
 	cmpi.w	#4, ($FFFFC602).w
-	bne.s	loc_D262
+	bne.s	+
 	addq.w	#1, (Window_routine_4).w
-loc_D262:
++
 	rts
 loc_D264:
 	move.w	($FFFFC602).w, d0
@@ -122,11 +123,11 @@ loc_D28C:
 	bsr.w	loc_D6D4
 	move.w	#$130E, ($FFFFCD02).w
 	bra.s	loc_D252
-loc_D298:
+CheckSaves_Complete:
 	move.w	#$1310, (Script_queue).w ; Data check complete.
 	addq.w	#1, (Window_routine_4).w
 	rts
-loc_D2A4:
+CheckSaves_Return:
 	move.w	#0, (Window_routine_4).w
 	addq.w	#1, (Window_routine_2).w
 	move.w	#$8001, (Window_queue).w
