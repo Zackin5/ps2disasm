@@ -25,7 +25,7 @@ zeroOffsetOptimization = 1
 
 bugfixes = 1			; if 1, include bug fixes
 dezo_steal_fix = 1		; if 1, Shir will no longer steal on Dezo
-walk_speed = 1			; 0 = normal; 1 = double; 2 = quadruple
+walk_speed = 0			; 0 = normal; 1 = double; 2 = quadruple
 exp_gain = 1			; 0 = normal; 1 = double; 2 = quadruple
 meseta_gain = 1			; 0 = normal; 1 = double; 2 = quadruple
 checksum_remove = 0		; if 1, remove the checksum calculation routine resulting in a faster boot time
@@ -6224,13 +6224,13 @@ loc_382A:
 	moveq	#0, d6
 	bsr.w	Obj_Move
 	bne.s	MapChar_ChkMoveDown
-	if walk_speed=0
-	move.w	#-1, y_move_steps(a0)
-	elseif walk_speed=1
+	
+	btst	#Button_A, (Joypad_held).w	; check if C is being pressed
+	bne.s	.move_run	; jump to run if it is
+ 	move.w	#-1, y_move_steps(a0)
+	bra.w	loc_38FC
+.move_run
 	move.w	#-2, y_move_steps(a0)
-	elseif walk_speed=2
-	move.w	#-4, y_move_steps(a0)
-	endif
 	bra.w	loc_38FC
 
 
@@ -6261,14 +6261,14 @@ MapChar_ChkMoveLeft:
 	move.w	#$FFF0, d5
 	moveq	#2, d6
 	bsr.w	Obj_Move
-	beq.s	loc_38C6
+	beq.s	+
 	cmpi.b	#$FE, d4
 	bne.s	MapChar_ChkMoveRight
 	cmpi.b	#3, $2E(a1)
 	bne.s	MapChar_ChkMoveRight
 	move.w	#$40, (Joypad_held).w
 	bra.s	loc_38F4
-loc_38C6:
++
 	if walk_speed=0
 	move.w	#-1, x_move_steps(a0)
 	elseif walk_speed=1
@@ -6299,7 +6299,7 @@ loc_38F4:
 	move.w	facing_dir(a0), mapping_frame(a0)
 	rts
 
-loc_38FC:
+loc_38FC: ; Collision check?
 	if walk_speed=0
 	move.w	#$F, step_duration(a0)		; update character's position for 16 frames
 	elseif walk_speed=1
