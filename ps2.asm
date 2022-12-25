@@ -6339,8 +6339,11 @@ loc_3956:
 	cmpi.w	#0, facing_dir(a0)
 	bne.s	MapCamera_MoveDown
 MapCamera_MoveUp:	
+	tst.w	(Cutscene_flag).w	; Verify we're not in a cutscene
+	bne.s	.move_normal	; jump to normal movement if we are
 	btst	#Button_C, (Joypad_held).w	; check if run button is being pressed TODO: doing it this way may affect cutscenes lol
 	bne.s	.move_run	; jump to run if it is
+.move_normal
 	move.w	#-1, (Camera_Y_step_counter).w
 	jmp		MapCamera_MoveDown
 .move_run
@@ -6351,8 +6354,11 @@ MapCamera_MoveDown:
 	bcs.s	loc_3996
 	cmpi.w	#3, facing_dir(a0)
 	bne.s	loc_3996
+	tst.w	(Cutscene_flag).w	; Verify we're not in a cutscene
+	bne.s	.move_normal	; jump to normal movement if we are
 	btst	#Button_C, (Joypad_held).w	; check if run button is being pressed
 	bne.s	.move_run	; jump to run if it is
+.move_normal
 	move.w	#1, (Camera_Y_step_counter).w
 	jmp		loc_3996
 .move_run
@@ -6366,8 +6372,11 @@ loc_3996:
 	cmpi.w	#6, facing_dir(a0)
 	bne.s	MapCamera_MoveRight
 MapCamera_MoveLeft:
+	tst.w	(Cutscene_flag).w	; Verify we're not in a cutscene
+	bne.s	.move_normal	; jump to normal movement if we are
 	btst	#Button_C, (Joypad_held).w	; check if run button is being pressed
 	bne.s	.move_run	; jump to run if it is
+.move_normal
 	move.w	#-1, (Camera_X_step_counter).w
 	jmp		MapCamera_MoveRight
 .move_run
@@ -6378,8 +6387,11 @@ MapCamera_MoveRight:
 	bcs.s	MapCamera_Move_Exit
 	cmpi.w	#9, facing_dir(a0)
 	bne.s	MapCamera_Move_Exit
+	tst.w	(Cutscene_flag).w	; Verify we're not in a cutscene
+	bne.s	.move_normal	; jump to normal movement if we are
 	btst	#Button_C, (Joypad_held).w	; check if run button is being pressed
 	bne.s	.move_run	; jump to run if it is
+.move_normal
 	move.w	#1, (Camera_X_step_counter).w
 	jmp		MapCamera_Move_Exit
 .move_run
