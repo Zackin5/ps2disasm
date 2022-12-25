@@ -6338,26 +6338,26 @@ loc_3956:
 	bhi.s	MapCamera_MoveDown
 	cmpi.w	#0, facing_dir(a0)
 	bne.s	MapCamera_MoveDown
-MapCamera_MoveUp:
-	if walk_speed=0
+MapCamera_MoveUp:	
+	btst	#Button_C, (Joypad_held).w	; check if run button is being pressed TODO: doing it this way may affect cutscenes lol
+	bne.s	.move_run	; jump to run if it is
 	move.w	#-1, (Camera_Y_step_counter).w
-	elseif walk_speed=1
+	jmp		MapCamera_MoveDown
+.move_run
 	move.w	#-2, (Camera_Y_step_counter).w
-	elseif walk_speed=2
-	move.w	#-4, (Camera_Y_step_counter).w
-	endif
+
 MapCamera_MoveDown:
 	cmpi.w	#$118, sprite_y_pos(a0)
 	bcs.s	loc_3996
 	cmpi.w	#3, facing_dir(a0)
 	bne.s	loc_3996
-	if walk_speed=0
+	btst	#Button_C, (Joypad_held).w	; check if run button is being pressed
+	bne.s	.move_run	; jump to run if it is
 	move.w	#1, (Camera_Y_step_counter).w
-	elseif walk_speed=1
+	jmp		loc_3996
+.move_run
 	move.w	#2, (Camera_Y_step_counter).w
-	elseif walk_speed=2
-	move.w	#4, (Camera_Y_step_counter).w
-	endif
+
 loc_3996:
 	btst	#6, (Cutscene_joypad).w
 	bne.s	MapCamera_MoveLeft
@@ -6366,25 +6366,24 @@ loc_3996:
 	cmpi.w	#6, facing_dir(a0)
 	bne.s	MapCamera_MoveRight
 MapCamera_MoveLeft:
-	if walk_speed=0
+	btst	#Button_C, (Joypad_held).w	; check if run button is being pressed
+	bne.s	.move_run	; jump to run if it is
 	move.w	#-1, (Camera_X_step_counter).w
-	elseif walk_speed=1
+	jmp		MapCamera_MoveRight
+.move_run
 	move.w	#-2, (Camera_X_step_counter).w
-	elseif walk_speed=2
-	move.w	#-4, (Camera_X_step_counter).w
-	endif
+
 MapCamera_MoveRight:
 	cmpi.w	#$168, sprite_x_pos(a0)
 	bcs.s	MapCamera_Move_Exit
 	cmpi.w	#9, facing_dir(a0)
 	bne.s	MapCamera_Move_Exit
-	if walk_speed=0
+	btst	#Button_C, (Joypad_held).w	; check if run button is being pressed
+	bne.s	.move_run	; jump to run if it is
 	move.w	#1, (Camera_X_step_counter).w
-	elseif walk_speed=1
+	jmp		MapCamera_Move_Exit
+.move_run
 	move.w	#2, (Camera_X_step_counter).w
-	elseif walk_speed=2
-	move.w	#4, (Camera_X_step_counter).w
-	endif
 MapCamera_Move_Exit:
 	bsr.w	loc_8BBA
 	rts
