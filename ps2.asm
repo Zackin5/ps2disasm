@@ -6228,10 +6228,10 @@ loc_382A:
 	btst	#Button_A, (Joypad_held).w	; check if C is being pressed
 	bne.s	.move_run	; jump to run if it is
  	move.w	#-1, y_move_steps(a0)
-	bra.w	loc_38FC
+	bra.w	MapChar_ChkCollision
 .move_run
 	move.w	#-2, y_move_steps(a0)
-	bra.w	loc_38FC
+	bra.w	MapChar_ChkCollision
 
 
 MapChar_ChkMoveDown:
@@ -6243,14 +6243,14 @@ MapChar_ChkMoveDown:
 	moveq	#1, d6
 	bsr.w	Obj_Move
 	bne.s	MapChar_ChkMoveLeft
-	if walk_speed=0
-	move.w	#1, y_move_steps(a0)
-	elseif walk_speed=1
+	
+	btst	#Button_A, (Joypad_held).w	; check if C is being pressed
+	bne.s	.move_run	; jump to run if it is
+ 	move.w	#1, y_move_steps(a0)
+	bra.w	MapChar_ChkCollision
+.move_run
 	move.w	#2, y_move_steps(a0)
-	elseif walk_speed=2
-	move.w	#4, y_move_steps(a0)
-	endif
-	bra.s	loc_38FC
+	bra.w	MapChar_ChkCollision
 
 
 MapChar_ChkMoveLeft:
@@ -6267,39 +6267,39 @@ MapChar_ChkMoveLeft:
 	cmpi.b	#3, $2E(a1)
 	bne.s	MapChar_ChkMoveRight
 	move.w	#$40, (Joypad_held).w
-	bra.s	loc_38F4
+	bra.s	MapChar_Move_Exit
 +
-	if walk_speed=0
-	move.w	#-1, x_move_steps(a0)
-	elseif walk_speed=1
+	btst	#Button_A, (Joypad_held).w	; check if C is being pressed
+	bne.s	.move_run	; jump to run if it is
+ 	move.w	#-1, x_move_steps(a0)
+	bra.w	MapChar_ChkCollision
+.move_run
 	move.w	#-2, x_move_steps(a0)
-	elseif walk_speed=2
-	move.w	#-4, x_move_steps(a0)
-	endif
-	bra.w	loc_38FC
+	bra.w	MapChar_ChkCollision
 
 MapChar_ChkMoveRight:
 	btst	#ButtonRight, (a3)
-	beq.s	loc_38F4
+	beq.s	MapChar_Move_Exit
 	move.w	#9, facing_dir(a0)
 	move.w	#0, d4
 	move.w	#$10, d5
 	moveq	#3, d6
 	bsr.w	Obj_Move
-	bne.s	loc_38F4
-	if walk_speed=0
-	move.w	#1, x_move_steps(a0)
-	elseif walk_speed=1
+	bne.s	MapChar_Move_Exit
+
+	btst	#Button_A, (Joypad_held).w	; check if C is being pressed
+	bne.s	.move_run	; jump to run if it is
+ 	move.w	#1, x_move_steps(a0)
+	bra.w	MapChar_ChkCollision
+.move_run
 	move.w	#2, x_move_steps(a0)
-	elseif walk_speed=2
-	move.w	#4, x_move_steps(a0)
-	endif
-	bra.s	loc_38FC
-loc_38F4:
+	bra.w	MapChar_ChkCollision
+
+MapChar_Move_Exit:
 	move.w	facing_dir(a0), mapping_frame(a0)
 	rts
 
-loc_38FC: ; Collision check?
+MapChar_ChkCollision:
 	if walk_speed=0
 	move.w	#$F, step_duration(a0)		; update character's position for 16 frames
 	elseif walk_speed=1
