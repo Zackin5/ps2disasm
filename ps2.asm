@@ -6225,7 +6225,7 @@ loc_382A:
 	bsr.w	Obj_Move
 	bne.s	MapChar_ChkMoveDown
 	
-	btst	#Button_A, (Joypad_held).w	; check if run button is being pressed
+	btst	#Button_C, (Joypad_held).w	; check if run button is being pressed
 	bne.s	.move_run	; jump to run if it is
  	move.w	#-1, y_move_steps(a0)
 	bra.w	MapChar_ChkCollision
@@ -6244,7 +6244,7 @@ MapChar_ChkMoveDown:
 	bsr.w	Obj_Move
 	bne.s	MapChar_ChkMoveLeft
 	
-	btst	#Button_A, (Joypad_held).w	; check if run button is being pressed
+	btst	#Button_C, (Joypad_held).w	; check if run button is being pressed
 	bne.s	.move_run	; jump to run if it is
  	move.w	#1, y_move_steps(a0)
 	bra.w	MapChar_ChkCollision
@@ -6269,7 +6269,7 @@ MapChar_ChkMoveLeft:
 	move.w	#$40, (Joypad_held).w
 	bra.s	MapChar_Move_Exit
 +
-	btst	#Button_A, (Joypad_held).w	; check if run button is being pressed
+	btst	#Button_C, (Joypad_held).w	; check if run button is being pressed
 	bne.s	.move_run	; jump to run if it is
  	move.w	#-1, x_move_steps(a0)
 	bra.w	MapChar_ChkCollision
@@ -6287,7 +6287,7 @@ MapChar_ChkMoveRight:
 	bsr.w	Obj_Move
 	bne.s	MapChar_Move_Exit
 
-	btst	#Button_A, (Joypad_held).w	; check if run button is being pressed
+	btst	#Button_C, (Joypad_held).w	; check if run button is being pressed
 	bne.s	.move_run	; jump to run if it is
  	move.w	#1, x_move_steps(a0)
 	bra.w	MapChar_ChkCollision
@@ -6300,7 +6300,7 @@ MapChar_Move_Exit:
 	rts
 
 MapChar_ChkCollision:
-	btst	#Button_A, (Joypad_held).w	; check if run button is being pressed
+	btst	#Button_C, (Joypad_held).w	; check if run button is being pressed
 	bne.s	.move_run	; jump to run if it is
 	move.w	#$F, step_duration(a0)		; update character's position for 16 frames
 	jmp +
@@ -6333,12 +6333,12 @@ loc_3956:
 	move.w	#0, (Camera_X_step_counter).w
 	move.w	#0, (Camera_Y_step_counter).w
 	btst	#4, (Cutscene_joypad).w
-	bne.s	loc_397A
+	bne.s	MapCamera_MoveUp
 	cmpi.w	#$C8, sprite_y_pos(a0)
-	bhi.s	loc_3980
+	bhi.s	MapCamera_MoveDown
 	cmpi.w	#0, facing_dir(a0)
-	bne.s	loc_3980
-loc_397A:
+	bne.s	MapCamera_MoveDown
+MapCamera_MoveUp:
 	if walk_speed=0
 	move.w	#-1, (Camera_Y_step_counter).w
 	elseif walk_speed=1
@@ -6346,7 +6346,7 @@ loc_397A:
 	elseif walk_speed=2
 	move.w	#-4, (Camera_Y_step_counter).w
 	endif
-loc_3980:
+MapCamera_MoveDown:
 	cmpi.w	#$118, sprite_y_pos(a0)
 	bcs.s	loc_3996
 	cmpi.w	#3, facing_dir(a0)
@@ -6360,12 +6360,12 @@ loc_3980:
 	endif
 loc_3996:
 	btst	#6, (Cutscene_joypad).w
-	bne.s	loc_39AE
+	bne.s	MapCamera_MoveLeft
 	cmpi.w	#$D8, sprite_x_pos(a0)
-	bhi.s	loc_39B4
+	bhi.s	MapCamera_MoveRight
 	cmpi.w	#6, facing_dir(a0)
-	bne.s	loc_39B4
-loc_39AE:
+	bne.s	MapCamera_MoveRight
+MapCamera_MoveLeft:
 	if walk_speed=0
 	move.w	#-1, (Camera_X_step_counter).w
 	elseif walk_speed=1
@@ -6373,11 +6373,11 @@ loc_39AE:
 	elseif walk_speed=2
 	move.w	#-4, (Camera_X_step_counter).w
 	endif
-loc_39B4:
+MapCamera_MoveRight:
 	cmpi.w	#$168, sprite_x_pos(a0)
-	bcs.s	loc_39CA
+	bcs.s	MapCamera_Move_Exit
 	cmpi.w	#9, facing_dir(a0)
-	bne.s	loc_39CA
+	bne.s	MapCamera_Move_Exit
 	if walk_speed=0
 	move.w	#1, (Camera_X_step_counter).w
 	elseif walk_speed=1
@@ -6385,7 +6385,7 @@ loc_39B4:
 	elseif walk_speed=2
 	move.w	#4, (Camera_X_step_counter).w
 	endif
-loc_39CA:
+MapCamera_Move_Exit:
 	bsr.w	loc_8BBA
 	rts
 
