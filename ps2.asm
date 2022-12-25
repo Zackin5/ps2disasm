@@ -6225,7 +6225,7 @@ loc_382A:
 	bsr.w	Obj_Move
 	bne.s	MapChar_ChkMoveDown
 	
-	btst	#Button_A, (Joypad_held).w	; check if C is being pressed
+	btst	#Button_A, (Joypad_held).w	; check if run button is being pressed
 	bne.s	.move_run	; jump to run if it is
  	move.w	#-1, y_move_steps(a0)
 	bra.w	MapChar_ChkCollision
@@ -6244,7 +6244,7 @@ MapChar_ChkMoveDown:
 	bsr.w	Obj_Move
 	bne.s	MapChar_ChkMoveLeft
 	
-	btst	#Button_A, (Joypad_held).w	; check if C is being pressed
+	btst	#Button_A, (Joypad_held).w	; check if run button is being pressed
 	bne.s	.move_run	; jump to run if it is
  	move.w	#1, y_move_steps(a0)
 	bra.w	MapChar_ChkCollision
@@ -6269,7 +6269,7 @@ MapChar_ChkMoveLeft:
 	move.w	#$40, (Joypad_held).w
 	bra.s	MapChar_Move_Exit
 +
-	btst	#Button_A, (Joypad_held).w	; check if C is being pressed
+	btst	#Button_A, (Joypad_held).w	; check if run button is being pressed
 	bne.s	.move_run	; jump to run if it is
  	move.w	#-1, x_move_steps(a0)
 	bra.w	MapChar_ChkCollision
@@ -6287,7 +6287,7 @@ MapChar_ChkMoveRight:
 	bsr.w	Obj_Move
 	bne.s	MapChar_Move_Exit
 
-	btst	#Button_A, (Joypad_held).w	; check if C is being pressed
+	btst	#Button_A, (Joypad_held).w	; check if run button is being pressed
 	bne.s	.move_run	; jump to run if it is
  	move.w	#1, x_move_steps(a0)
 	bra.w	MapChar_ChkCollision
@@ -6300,13 +6300,13 @@ MapChar_Move_Exit:
 	rts
 
 MapChar_ChkCollision:
-	if walk_speed=0
+	btst	#Button_A, (Joypad_held).w	; check if run button is being pressed
+	bne.s	.move_run	; jump to run if it is
 	move.w	#$F, step_duration(a0)		; update character's position for 16 frames
-	elseif walk_speed=1
+	jmp +
+.move_run
 	move.w	#7, step_duration(a0)		; update character's position for 8 frames
-	elseif walk_speed=2
-	move.w	#3, step_duration(a0)		; update character's position for 4 frames
-	endif
++
 	move.w	#1, (Encounter_step_flag).w
 	move.w	#1, $30(a0)
 
