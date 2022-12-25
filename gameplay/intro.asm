@@ -86,18 +86,18 @@ CheckSaves_Audit:
 	tst.b	(a0)
 	bne.s	CheckSaves_Load
 	tst.b	$2000(a0)
-	beq.s	loc_D252
+	beq.s	CheckSaves_Load_Exit
 CheckSaves_Load:
 	move.w	#$130D, (Script_queue).w ; There is a problem with
-	bsr.w	loc_D676
+	bsr.w	SaveData_loc_D676
 	bne.s	loc_D264
 	move.w	($FFFFC602).w, d0
 	addq.w	#4, d0
-	bsr.w	loc_D676
+	bsr.w	SaveData_loc_D676
 	bne.s	loc_D280
 	move.w	#$130C, (Script_queue).w ; "The data for ", $C0, " is ok."
 	;move.b	#1, (Window_current_option).w ; Reindex selected menu option so we start at CONTINUE TODO: figure out what's overwriting this
-loc_D252:
+CheckSaves_Load_Exit:
 	addq.w	#1, ($FFFFC602).w
 	cmpi.w	#4, ($FFFFC602).w
 	bne.s	+
@@ -107,12 +107,12 @@ loc_D252:
 loc_D264:
 	move.w	($FFFFC602).w, d0
 	addq.w	#4, d0
-	bsr.w	loc_D676
+	bsr.w	SaveData_loc_D676
 	beq.s	loc_D288
 	move.w	#$130F, ($FFFFCD02).w
 	move.w	($FFFFC602).w, d5
 	bsr.w	SaveData
-	bra.s	loc_D252
+	bra.s	CheckSaves_Load_Exit
 loc_D280:
 	move.w	($FFFFC602).w, d0
 	addq.w	#4, d0
@@ -122,7 +122,7 @@ loc_D288:
 loc_D28C:
 	bsr.w	loc_D6D4
 	move.w	#$130E, ($FFFFCD02).w
-	bra.s	loc_D252
+	bra.s	CheckSaves_Load_Exit
 CheckSaves_Complete:
 	move.w	#$1310, (Script_queue).w ; Data check complete.
 	addq.w	#1, (Window_routine_4).w

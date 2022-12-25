@@ -46,7 +46,7 @@ SaveData:
 	dbf	d1, -
 	rts
 
-loc_D676:
+SaveData_loc_D676:
 	lea	($200001).l, a0
 	lsl.w	#8, d0
 	lsl.w	#3, d0
